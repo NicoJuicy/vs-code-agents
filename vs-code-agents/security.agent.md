@@ -99,7 +99,7 @@ Before starting any review, classify the request into one of these modes:
 
 When mode is ambiguous, respond with **exactly this** (adapt bracketed text to context):
 
-```
+```markdown
 Before I begin, I need to confirm the review mode and scope.
 
 **Which mode?**

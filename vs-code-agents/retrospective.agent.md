@@ -281,7 +281,7 @@ End storage with: **"Saved progress to Flowbaby memory."**
 - **QA Report**: `agent-output/qa/NNN-plan-name-qa.md`
 - **UAT Report**: `agent-output/uat/NNN-plan-name-uat.md`
 - **Escalations**: `agent-output/escalations/NNN-*` (if any)
-```
+```markdown
 
 Response Style:
 

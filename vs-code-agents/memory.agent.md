@@ -54,7 +54,7 @@ A development and planning agent that:
 
 ## Example: Retrieval at start of turn
 
-```
+```json
 #flowbabyRetrieveMemory {
   "query": "authentication module refactor",
   "maxResults": 3
@@ -63,7 +63,7 @@ A development and planning agent that:
 
 ## Example: Storing a milestone summary
 
-```
+```json
 #flowbabyStoreSummary {
   "topic": "Auth refactor step 1",
   "context": "Completed restructuring of login flow, extracted validation, updated tests.",
@@ -75,7 +75,7 @@ A development and planning agent that:
 
 # Retrieval Template
 
-```
+```json
 #flowbabyRetrieveMemory {
   "query": "key terms from current request",
   "maxResults": 3
@@ -84,7 +84,7 @@ A development and planning agent that:
 
 # Summary Template
 
-```
+```json
 #flowbabyStoreSummary {
   "topic": "3–7 word title",
   "context": "A concise but rich description of 300–1500 characters covering goals, key decisions, reasoning, tradeoffs, rejected options, constraints, and nuances behind the plan — not just actions taken.",
@@ -128,41 +128,41 @@ Flowbaby memory tools may be unavailable (extension not installed, not initializ
 
 ### Retrieval Template
 
-```
-#flowbabyRetrieveMemory {
-  "query": "key terms from current request",
-  "maxResults": 3
+```json
+#flowbabyStoreSummary {
+  "topic": "3–7 word title",
+  "context": "A concise but rich description of 300–1500 characters covering goals, key decisions, reasoning, tradeoffs, rejected options, constraints, and nuances behind the plan — not just actions taken.",
+  "decisions": ["Important decision"],
+  "rationale": ["Reason for the decision"],
+  "metadata": { "status": "Active", "plan_id": "memory-<date>" }
 }
 ```
 
----
+# Unified Memory Contract (Role-Agnostic)
 
-## 2. Execution (Using Retrieved Memory)
+*For all agents using Flowbaby tools*
 
-* Use retrieved memory to produce consistent reasoning and decisions.
-* Maintain brief internal notes that will later be summarized.
-* Ask for clarification only when memory and context are insufficient.
+Using Flowbaby tools (`flowbaby_storeMemory` and `flowbaby_retrieveMemory`) is **mandatory**.
 
----
 
-## 3. Summarization (Milestones)
+## 0. No-Memory Mode Fallback
 
-Store memory:
+Flowbaby memory tools may be unavailable (extension not installed, not initialized, or API key not set).
 
-* Whenever you complete meaningful progress, make a decision, revise a plan, establish a pattern, or reach a natural boundary.
-* And at least every 5 turns.
+**Detection**: If `flowbaby_retrieveMemory` or `flowbaby_storeMemory` calls fail or are rejected, switch to **No-Memory Mode**.
 
-Summaries should be dense and actionable. 300–1500 characters.
-
-Include:
-
-* Goal or intent
-* What happened / decisions / creations
+```json
+#flowbaby_retrieveMemory {
+  "query": "previous memory summary or relevant topic",
+  "maxResults": 3
+}
+```
 * Reasoning or considerations
 * Constraints, preferences, dead ends, negative knowledge
 * Optional artifact links (filenames, draft identifiers)
 
 End storage with: "Saved progress to Flowbaby memory."
+
 
 ---
 

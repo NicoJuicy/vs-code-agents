@@ -48,7 +48,7 @@ A single general-purpose AI tries to do everything—plan, code, test, review—
 
 Every agent produces **Markdown documents** in `agent-output/`:
 
-```
+```text
 agent-output/
 ├── planning/           # Plans with WHAT/WHY
 ├── analysis/           # Research findings
@@ -73,7 +73,7 @@ agent-output/
 
 ### Pattern 1: The Planning Pipeline
 
-```
+```text
 ┌──────────┐    ┌─────────┐    ┌───────────┐    ┌──────────┐
 │ Roadmap  │───▶│ Planner │───▶│ Analyst/  │───▶│  Critic  │
 │ (vision) │    │ (plan)  │    │ Architect │    │ (review) │
@@ -99,7 +99,7 @@ agent-output/
 
 ### Pattern 2: The Implementation Loop
 
-```
+```text
 ┌─────────────┐    ┌──────┐    ┌──────┐    ┌────────┐
 │ Implementer │───▶│  QA  │───▶│ UAT  │───▶│ DevOps │
 │   (code)    │    │(test)│    │(value)    │(release)│
@@ -121,7 +121,7 @@ agent-output/
 
 ### Pattern 3: The Investigation Branch
 
-```
+```text
 ┌─────────────┐    ┌─────────┐    ┌─────────────┐
 │ Any Agent   │───▶│ Analyst │───▶│ Back to     │
 │ hits unknown│    │(research)    │ calling agent
@@ -137,7 +137,7 @@ agent-output/
 
 ### Pattern 4: The Security Gate
 
-```
+```text
 ┌─────────────┐    ┌──────────┐    ┌─────────────┐
 │ Any Phase   │───▶│ Security │───▶│ Continue or │
 │ (sensitive) │    │ (audit)  │    │ Block       │
@@ -153,7 +153,7 @@ agent-output/
 
 ### Pattern 5: The Retrospective Cycle
 
-```
+```text
 ┌──────────┐    ┌───────────────┐    ┌────────────────────┐
 │ Delivery │───▶│ Retrospective │───▶│ ProcessImprovement │
 │ complete │    │ (lessons)     │    │ (evolve agents)    │
@@ -173,7 +173,7 @@ agent-output/
 
 ### Document Naming Convention
 
-```
+```text
 NNN-feature-name-type.md
 ```
 
@@ -253,10 +253,10 @@ Most "memory" solutions for AI agents fall into traps:
    - Search "Flowbaby"
    - Click Install
 
-   Or install via command line:
-   ```
-   ext install flowbaby.flowbaby
-   ```
+  Or install via command line:
+  ```bash
+  ext install flowbaby.flowbaby
+  ```
 
 2. **Initialize Workspace**:
    - Command Palette (`Ctrl+Shift+P`)

@@ -45,7 +45,7 @@ git clone https://github.com/yourusername/agents.git
 ### 2. Add to Your Project
 
 Copy agents to your workspace:
-```
+```text
 your-project/
 └── .github/
     └── agents/
@@ -56,7 +56,7 @@ your-project/
 
 ### 3. Use in Copilot Chat
 
-```
+```text
 @Planner Create a plan for adding user authentication
 @Implementer Implement the approved plan at agent-output/planning/001-auth-plan.md
 ```
@@ -90,9 +90,9 @@ copilot --agent planner --prompt "Create a plan for adding user authentication"
 
 ---
 
-## Typical Workflow
+### Typical Workflow
 
-```
+```text
 Roadmap → Planner → Analyst/Architect/Security/Critic → Implementer → QA → UAT → DevOps
 ```
 
@@ -166,7 +166,7 @@ Most AI memory solutions don't work well:
 
 ## Repository Structure
 
-```
+```text
 agents/
 ├── README.md                    # This file
 ├── USING-AGENTS.md              # Quick start guide
