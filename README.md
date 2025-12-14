@@ -69,7 +69,16 @@ Install [Flowbaby](https://marketplace.visualstudio.com/items?itemName=flowbaby.
 2. Command Palette → "Flowbaby: Initialize Workspace"
 3. Command Palette → "Flowbaby: Set API Key"
 
----
+### 5. (Optional) Use with GitHub Copilot CLI
+
+You can also use these agents with the GitHub Copilot CLI by placing your `.agent.md` files under `.github/agents/` in each repository where you run the CLI, then invoking them with commands like:
+
+```bash
+copilot --agent planner --prompt "Create a plan for adding user authentication"
+```
+
+**Known limitation (user-level agents):** The Copilot CLI currently has an upstream bug where user-level agents in `~/.copilot/agents/` are not loaded, even though they are documented ([github/copilot-cli#452](https://github.com/github/copilot-cli/issues/452)). This behavior and the recommended per-repository workaround were identified and documented by @rjmurillo. Until the bug is fixed, prefer `.github/agents/` in each repo.
+
 
 ## Documentation
 

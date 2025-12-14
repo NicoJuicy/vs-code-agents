@@ -26,6 +26,28 @@ In this repo, the source copies live under `vs-code-agents/`; you can copy or sy
 
 For more guidance on GitHub Copilot agents in VS Code, see the official documentation: https://code.visualstudio.com/docs/copilot/copilot-agents
 
+## Using with GitHub Copilot CLI
+
+These agents were originally written for GitHub Copilot in VS Code, but you can also use them with the GitHub Copilot CLI.
+
+- Place your `.agent.md` files under `.github/agents/` in each repository where you run the CLI.
+- Then invoke an agent with a command like:
+
+```bash
+copilot --agent planner --prompt "Create a plan for adding user authentication"
+```
+
+### Known limitation (user-level agents)
+
+The Copilot CLI has a known upstream bug ([github/copilot-cli#452](https://github.com/github/copilot-cli/issues/452)) where **user-level agents in `~/.copilot/agents/` are not loaded**, even though they are documented. This behavior and workaround were originally reported and documented by @rjmurillo.
+
+**Workaround:**
+
+- Use per-repository agents under `.github/agents/` instead of relying on `~/.copilot/agents/`.
+- If you prefer a single source of truth, you can keep your agents in one folder and copy or symlink them into each repo’s `.github/agents/` directory.
+
+Once the upstream bug is fixed, this section can be updated to reflect the restored user-level behavior.
+
 ## Customizing Agents
 
 Each `.agent.md` file defines:
