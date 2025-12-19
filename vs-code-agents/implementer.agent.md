@@ -32,6 +32,31 @@ handoffs:
 - SOLID, DRY, YAGNI, KISS principles — load `engineering-standards` skill for detection patterns
 - Design patterns, clean code, test pyramid
 
+### Test-Driven Development (TDD)
+
+**TDD is MANDATORY for new feature code.** Load `testing-patterns/references/testing-anti-patterns` skill when writing tests.
+
+**TDD Cycle (Red-Green-Refactor):**
+1. **Red**: Write failing test defining expected behavior BEFORE implementation
+2. **Green**: Write minimal code to pass the test
+3. **Refactor**: Clean up code while keeping tests green
+
+**The Iron Laws:**
+1. NEVER test mock behavior — test real component behavior
+2. NEVER add test-only methods to production classes — use test utilities
+3. NEVER mock without understanding dependencies — know side effects first
+
+**When TDD Applies:**
+- ✅ New features, new functions, behavior changes
+- ⚠️ Exception: Exploratory spikes (must TDD rewrite after)
+- ⚠️ Exception: Pure refactors with existing coverage
+
+**Red Flags to Avoid:**
+- Writing implementation before tests
+- Mock setup longer than test logic
+- Assertions on mock existence (`*-mock` test IDs)
+- "Implementation complete" with no tests
+
 ### Quality Attributes
 
 Balance testability, maintainability, scalability, performance, security, understandability.

@@ -56,6 +56,38 @@ Constraints:
 - QA docs in `agent-output/qa/` are exclusive domain
 - May update Status field in planning documents (to mark "QA Complete")
 
+## Test-Driven Development (TDD)
+
+**TDD is MANDATORY for new feature code.** Load `testing-patterns/references/testing-anti-patterns` skill when reviewing tests.
+
+### TDD Workflow
+1. **Red**: Write failing test that defines expected behavior
+2. **Green**: Implement minimal code to pass
+3. **Refactor**: Clean up while tests stay green
+
+### When to Enforce TDD
+- **Always**: New features, new functions, behavior changes
+- **Exception**: Exploratory spikes (must be followed by TDD rewrite)
+- **Exception**: Pure refactors with existing test coverage
+
+### Anti-Pattern Detection
+Before approving any implementation, verify against The Iron Laws:
+1. **NEVER test mock behavior** — Tests must verify real component behavior
+2. **NEVER add test-only methods to production** — Use test utilities instead
+3. **NEVER mock without understanding** — Know dependencies before mocking
+
+**Red Flags to Catch:**
+- Assertions on `*-mock` test IDs
+- Mock setup >50% of test
+- Methods only called in test files
+- "Implementation complete" before tests written
+
+### TDD Violation Response
+If implementation arrives without tests:
+1. **REJECT** with "TDD Required: Tests must be written first"
+2. Document which tests should have been written first
+3. Handoff back to Implementer with specific test requirements
+
 Process:
 
 **Phase 1: Pre-Implementation Test Strategy**

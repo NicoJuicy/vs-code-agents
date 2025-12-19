@@ -1,19 +1,66 @@
 ---
 name: testing-patterns
-description: Test strategy patterns including test pyramid, coverage strategies, mocking approaches, and edge case generation. Load when designing test strategies, reviewing test coverage, or implementing test frameworks.
+description: TDD workflow and test strategy patterns including test pyramid, coverage strategies, mocking approaches, and anti-patterns. Load when writing tests, designing test strategies, or reviewing test coverage.
 license: MIT
 metadata:
   author: groupzer0
-  version: "1.0"
+  version: "1.1"
 ---
 
 # Testing Patterns
 
 Systematic approach to effective testing. Use this skill when:
+- Writing or changing tests (load anti-patterns reference)
 - Designing test strategies for new features
 - Reviewing test coverage adequacy
 - Implementing test frameworks or infrastructure
-- Identifying missing test scenarios
+
+---
+
+## Test-Driven Development (TDD)
+
+**TDD is MANDATORY for new feature code.** Write tests before implementation.
+
+### The TDD Cycle
+
+```
+┌─────────────────────────────────────────┐
+│                                         │
+│   1. RED     → Write failing test       │
+│   2. GREEN   → Minimal code to pass     │
+│   3. REFACTOR → Clean up, tests stay green │
+│   4. REPEAT                             │
+│                                         │
+└─────────────────────────────────────────┘
+```
+
+### Why TDD?
+
+| Benefit | How TDD Delivers |
+|---------|------------------|
+| **Prevents over-mocking** | You see what test needs before mocking |
+| **No test-only production code** | Minimal implementation = no extras |
+| **Tests real behavior** | Failing test proves it tests something real |
+| **Better design** | Testable code = loosely coupled code |
+
+### When TDD Applies
+
+| Situation | TDD? | Notes |
+|-----------|------|-------|
+| New features | ✅ Always | Core workflow |
+| Behavior changes | ✅ Always | Modify test first, then code |
+| Bug fixes | ✅ Preferred | Write test reproducing bug first |
+| Pure refactors | ⚠️ Optional | Existing tests should cover |
+| Exploratory spikes | ❌ Skip | But TDD rewrite after |
+
+### TDD Violations
+
+**If implementation arrives without tests:**
+1. Reject with "TDD Required"
+2. Specify which tests should exist
+3. Implementation writes tests first, then code
+
+See [references/testing-anti-patterns.md](references/testing-anti-patterns.md) for detailed anti-patterns and gate functions.
 
 ## Test Pyramid
 
@@ -33,7 +80,7 @@ Systematic approach to effective testing. Use this skill when:
 **What:** Test single function/class in isolation
 **When:** All business logic, utilities, data transformations
 **Speed:** Milliseconds
-**Isolation:** Mock all dependencies
+**Isolation:** Mock external dependencies (DB, network, filesystem)
 
 ```python
 # Good unit test
@@ -160,11 +207,13 @@ def test_user_can_checkout():
 
 ### When to Mock
 
-| Context | Mock? | Reason |
-|---------|-------|--------|
-| Unit tests | Always | Isolation |
-| Integration tests | External services only | Test real integration |
-| E2E tests | Never | Test real system |
+| Context | Mock What? | Reason |
+|---------|------------|--------|
+| Unit tests | External dependencies (DB, network, time) | Isolation + speed |
+| Integration tests | External services only | Test real component interaction |
+| E2E tests | Nothing | Test real system |
+
+> ⚠️ **TDD prevents over-mocking**: If you write the test first and watch it fail, you know exactly what needs mocking.
 
 ### Mock vs Stub vs Spy
 
@@ -187,12 +236,20 @@ spy_logger = Mock(wraps=real_logger)
 # Calls real method but records calls
 ```
 
-### Anti-Patterns
+### The Iron Laws of Mocking
 
-- **Over-mocking:** If you mock everything, you're testing mocks
-- **Mock pollution:** Mocks leaking between tests
-- **Implementation testing:** Testing that method A calls method B
-- **Fragile mocks:** Tests break when unrelated code changes
+1. **NEVER test mock behavior** — Test real component, not that mock exists
+2. **NEVER mock without understanding** — Know side effects before isolating
+3. **NEVER create incomplete mocks** — Mirror real API structure completely
+
+### Anti-Pattern Red Flags
+
+- Mock setup longer than test logic
+- Assertions on `*-mock` test IDs
+- Can't explain why mock is needed
+- Mocking "just to be safe"
+
+**Full anti-pattern details**: [references/testing-anti-patterns.md](references/testing-anti-patterns.md)
 
 ---
 

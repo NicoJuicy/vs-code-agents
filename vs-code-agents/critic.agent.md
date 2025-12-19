@@ -56,7 +56,7 @@ Review Method:
 3. Check for existing critique.
 4. Read target doc in full.
 5. Execute review:
-   - **Plan**: Value Statement? Semver? Direct value delivery? Architectural fit? Scope/debt? No code?
+   - **Plan**: Value Statement? Semver? Direct value delivery? Architectural fit? Scope/debt? No code? **Ask: "How will this plan result in a hotfix after deployment?"** — identify gaps, edge cases, and assumptions that will break in production.
    - **Architecture**: ADR format (Context/Decision/Status/Consequences)? Supports roadmap? Consistency? Alternatives/downsides?
    - **Roadmap**: Clear "So that"? P0 feasibility? Dependencies ordered? Master objective preserved?
 6. Document: Create/update `agent-output/critiques/Name-critique.md`. Track status (OPEN/ADDRESSED/RESOLVED/DEFERRED).
