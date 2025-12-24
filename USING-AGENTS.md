@@ -103,6 +103,37 @@ Skills are placed in different directories depending on your VS Code version:
 
 ---
 
+## Document Lifecycle Setup
+
+Agents use a **unified numbering system** to track work across the entire pipeline. All documents in a work chain share the same ID for easy traceability.
+
+### The `.next-id` File
+
+Create a simple counter file to enable unified numbering:
+
+```bash
+echo "1" > agent-output/.next-id
+```
+
+**What it does:**
+- When Analyst creates analysis `080`, Planner inherits `080` for the plan
+- QA, UAT, Implementation all use `080` too
+- Easy to follow: `analysis-080.md` → `plan-080.md` → `qa-080.md` → `uat-080.md`
+
+**If you have existing plans:** Start with your highest plan number + 1:
+```bash
+echo "75" > agent-output/.next-id  # If your highest plan is 074
+```
+
+**How it works:**
+1. Originating agents (Analyst, Planner) read the number, use it, then increment
+2. Downstream agents (QA, UAT, Implementer) inherit the ID from their source document
+3. Completed documents automatically move to `closed/` subfolders after commit
+
+That's it! The agents handle the rest automatically.
+
+---
+
 ## Agent-by-Agent Guide
 
 ### Roadmap – Product Vision & Epics
